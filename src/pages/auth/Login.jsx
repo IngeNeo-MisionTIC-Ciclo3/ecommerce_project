@@ -14,12 +14,12 @@ const Login = () => {
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               <input name="email" type="email" autoComplete="email" required="true"
-                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Correo Electrónico"/>
             </div>
             <div>
               <input id="password" name="password" type="password" autoComplete="current-password" required="true"
-                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Contraseña" />
             </div>
           </div>
@@ -27,7 +27,7 @@ const Login = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input id="recordar" name="recordar" type="checkbox" 
-              className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"/>
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"/>
               <label htmlFor="recordar" className="block ml-2 text-sm text-gray-900"> {" "} Recuérdame{" "} </label>
             </div>
 
