@@ -1,4 +1,5 @@
 import Login from 'pages/auth/Login';
+import Registro from 'pages/auth/Registro';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 
@@ -11,6 +12,9 @@ function App() {
             <Route path='/login'>
               <Login />
             </Route>
+          <Route path='/registro'>
+            <Registro />
+          </Route>
           </Switch>
         </Router>
     </div>

@@ -3,6 +3,7 @@ import Google from "media/google_logo.png";
 import Facebook from "media/facebook_logo.png";
 import { Link } from "react-router-dom";
 
+
 const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 py-2 bg-gray-50 sm:px-6 lg:px-8">
@@ -45,7 +46,7 @@ const Login = () => {
 
           <div className="flex items-center justify-between">
             <span>¿No tienes cuenta?</span>
-            <Link to="#">
+            <Link to='/registro'>
               <span className="font-medium text-blue-600 hover:text-blue-500"> Regístrate </span>
             </Link>
           </div>
