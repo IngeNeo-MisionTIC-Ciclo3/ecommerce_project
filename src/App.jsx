@@ -10,15 +10,15 @@ function App() {
     <div className='App'>
       <Router>
           <Switch>
-            <Route path='/login'>
-              <Login />
-            </Route>
-          <Route path='/registro'>
-            <Registro />
-          </Route>
-          <Route path='/usuarios'>
+          <Route path='/admin/usuarios'>
             <Usuarios />
           </Route>
+          <Route path='/auth/registro'>
+            <Registro />
+          </Route>
+            <Route path='/'>
+              <Login />
+            </Route>
           </Switch>
         </Router>
     </div>

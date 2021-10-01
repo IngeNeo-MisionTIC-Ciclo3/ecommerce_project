@@ -46,7 +46,7 @@ const Login = () => {
 
           <div className="flex items-center justify-between">
             <span>¿No tienes cuenta?</span>
-            <Link to='/registro'>
+            <Link to='/auth/registro'>
               <span className="font-medium text-blue-600 hover:text-blue-500"> Regístrate </span>
             </Link>
           </div>

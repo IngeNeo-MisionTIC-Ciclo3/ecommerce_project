@@ -7,15 +7,16 @@ const Usuarios = () => {
       <h2 className='mt-6 text-3xl font-extrabold text-center text-blue-600'>Modificar usaurios</h2>
       <form className='mt-8 space-y-6'>
         <div className='grid grid-cols-2 gap-2 rounded-md shadow-sm'>
-          <label htmlFor='nombre'> Nombre 
+          
+          <label htmlFor='nombre'> Nombres 
           <input name='nombre' type='text' autoComplete='email' required="true"
               className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
-              placeholder='Tu nombre'/>
+              placeholder='Tus nombres'/>
           </label>
-          <label htmlFor='apellido'> Apellido
+          <label htmlFor='apellido'> Apellidos
             <input name='apellido' type='text' required="true"
               className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
-              placeholder='Tu Apellido'/>
+              placeholder='Tus Apellidos'/>
           </label>
           <label htmlFor='telefono'> Teléfono móvil
             <input name='telefono' type='tel' required="true"
