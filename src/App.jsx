@@ -3,6 +3,7 @@ import Auth from 'layouts/Auth';
 import Publico from 'layouts/Publico';
 import Login from 'pages/auth/Login';
 import Registro from 'pages/auth/Registro';
+import Ventas from 'pages/admin/Ventas';  
 import Usuarios from 'pages/admin/Usuarios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
@@ -17,6 +18,9 @@ function App() {
               <Switch>
                 <Route path='/admin/usuarios'>
                   <Usuarios />
+                </Route>
+                <Route path='/admin/ventas'>
+                  <Ventas />
                 </Route>
               </Switch>
             </AdminLayout>
