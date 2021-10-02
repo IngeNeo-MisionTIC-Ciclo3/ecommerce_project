@@ -5,6 +5,7 @@ import RegistroProductos from 'pages/admin/RegistroProductos';
 import Ventas from 'pages/auth/Ventas';
 import Usuarios from 'pages/admin/Usuarios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import MVentas from 'pages/admin/MVentas';
 import 'styles/styles.css';
 
 
@@ -21,6 +22,9 @@ function App() {
              </Route>
           <Route path='/auth/registro'>
             <Registro />
+          </Route>
+          <Route path='/MVentas'>
+            <MVentas />
           </Route>
           <Route path='/admin/MProductos'>
             <MProductos/>
