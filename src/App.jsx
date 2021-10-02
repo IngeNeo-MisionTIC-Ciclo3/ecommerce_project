@@ -1,4 +1,5 @@
 import Login from 'pages/auth/Login';
+import MProductos from 'pages/auth/MProductos';
 import Registro from 'pages/auth/Registro';
 import RegistroProductos from 'pages/admin/RegistroProductos';
 import Ventas from 'pages/auth/Ventas';
@@ -20,6 +21,9 @@ function App() {
              </Route>
           <Route path='/auth/registro'>
             <Registro />
+          </Route>
+          <Route path='/admin/MProductos'>
+            <MProductos/>
           </Route>
           <Route path='/productos'>
             <RegistroProductos />
