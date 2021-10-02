@@ -7,6 +7,7 @@ import Ventas from 'pages/admin/Ventas';
 import Usuarios from 'pages/admin/Usuarios';
 import Productos from 'pages/admin/RegistroProductos';
 import MProductos from 'pages/admin/MProductos';
+import MVentas from 'pages/admin/MVentas';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 
@@ -15,7 +16,7 @@ function App() {
     <div className='App'>
       <Router>
         <Switch>
-          <Route path={['/admin', '/admin/usuarios']}>
+          <Route path={['/admin', '/admin/usuarios' , '/admin/ventas', '/admin/mventas', '/admin/productos', '/admin/mproductos']}>
             <AdminLayout>
               <Switch>
                 <Route path='/admin/usuarios'>
@@ -23,6 +24,9 @@ function App() {
                 </Route>
                 <Route path='/admin/ventas'>
                   <Ventas />
+                </Route>
+                <Route path='/admin/mventas'>
+                  <MVentas />
                 </Route>
                 <Route path='/admin/productos'>
                   <Productos />
