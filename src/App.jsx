@@ -1,6 +1,7 @@
 import Login from 'pages/auth/Login';
 import Registro from 'pages/auth/Registro';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import MVentas from 'pages/admin/MVentas';
 import 'styles/styles.css';
 
 
@@ -14,6 +15,9 @@ function App() {
             </Route>
           <Route path='/registro'>
             <Registro />
+          </Route>
+          <Route path='/MVentas'>
+            <MVentas />
           </Route>
           </Switch>
         </Router>
