@@ -1,5 +1,6 @@
 import Login from 'pages/auth/Login';
 import Registro from 'pages/auth/Registro';
+import RegistroProductos from 'pages/admin/RegistroProductos';
 import Ventas from 'pages/auth/Ventas';
 import Usuarios from 'pages/admin/Usuarios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -19,6 +20,9 @@ function App() {
              </Route>
           <Route path='/auth/registro'>
             <Registro />
+          </Route>
+          <Route path='/productos'>
+            <RegistroProductos />
           </Route>
             <Route path='/'>
               <Login />
