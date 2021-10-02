@@ -6,7 +6,9 @@ const Navbar = () => {
   return (
     <nav className='flex justify-between w-full bg-blue-200 border border-blue-300 navbar'>
         <div>
-          <Logoproyecto />
+          <Link to='/'>
+            <Logoproyecto />
+          </Link>
         </div>
 
         <div>
