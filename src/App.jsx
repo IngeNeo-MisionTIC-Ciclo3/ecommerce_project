@@ -3,9 +3,10 @@ import Auth from 'layouts/Auth';
 import Publico from 'layouts/Publico';
 import Login from 'pages/auth/Login';
 import Registro from 'pages/auth/Registro';
-import Ventas from 'pages/admin/Ventas';  
+import Ventas from 'pages/admin/Ventas';
 import Usuarios from 'pages/admin/Usuarios';
 import Productos from 'pages/admin/RegistroProductos';
+import MProductos from 'pages/admin/MProductos';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 
@@ -25,6 +26,9 @@ function App() {
                 </Route>
                 <Route path='/admin/productos'>
                   <Productos />
+                </Route>
+                <Route path='/admin/mproductos'>
+                  <MProductos />
                 </Route>
               </Switch>
             </AdminLayout>
