@@ -40,13 +40,13 @@ const Login = () => {
           <div>
             <button type="submit" className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
-              <Link to="#">Inicia sesión</Link>
+              <Link to="/admin/usuarios">Inicia sesión</Link>
             </button>
           </div>
 
           <div className="flex items-center justify-between">
             <span>¿No tienes cuenta?</span>
-            <Link to='/auth/registro'>
+            <Link to='/registro'>
               <span className="font-medium text-blue-600 hover:text-blue-500"> Regístrate </span>
             </Link>
           </div>
