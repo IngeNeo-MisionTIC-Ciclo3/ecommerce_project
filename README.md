@@ -28,28 +28,36 @@ Desarrollado en React con  Create React App
 ### Descripción GENERAL de interfaces
 
 #### Autenticación
+
 #####Login
+
 En la interfaz se muestra el formulario para inicio de sesión por medio de correo electrónico y contraseña y la opción e iniciar con Google o Facebook en caso deseado.
 Permite navegar a la opción de registrarse.
 
 #####Registrarse
+
 Para esta interfaz usamos un formulario básico de registro, con datos personales que posteriormente se validaran para la aprobación de uso del portal administrativo.
 
 #### Administración
 
 #####Maestro de Usuarios
+
 Para esta interfaz podremos realizar la actualización de los datos del usuario y su estado dentro de la plataforma, así como el tipo de perfil que manejará en la misma, de la misma manera se podrá visualizar los usuarios registrados en el sistema.
 
 #####Productos
+
 Para esta interfaz podremos realizar el ingreso o creación de los productos que se comercializan en la compañía y que serán desplegados en el Landing pages, cabe aclarar que esto solo lo podrá hacer el perfil autorizado.
 
 #####Maestro de Productos
+
 Para esta interfaz podremos realizar la actualización de la información de productos dentro de la plataforma, así como listar los mismos.
 
 #####Ventas
+
 Para esta interfaz podremos realizar el registro o movimiento de ventas de los productos que se comercializan en la compañía, que estén creados y que tenga en stock.
 
 #####Maestro de Ventas
+
 Para esta interfaz podremos realizar la actualización de la información de las ventas y conocer en todo momento el estado en el se encuentra el pedido y tener la trazabilidad de la operación
 
 ###Comandos a ejecutar
