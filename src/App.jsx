@@ -1,18 +1,22 @@
 import Login from 'pages/auth/Login';
 import Registro from 'pages/auth/Registro';
+import Ventas from 'pages/auth/Ventas';
 import Usuarios from 'pages/admin/Usuarios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/styles.css';
 
 
 function App() {
-  return (
+	return (
     <div className='App'>
       <Router>
-          <Switch>
-          <Route path='/admin/usuarios'>
-            <Usuarios />
-          </Route>
+         <Switch>
+            <Route path='/admin/usuarios'>
+                <Usuarios />
+            </Route>
+            <Route path='/admin/ventas'>
+                <Ventas />
+             </Route>
           <Route path='/auth/registro'>
             <Registro />
           </Route>
