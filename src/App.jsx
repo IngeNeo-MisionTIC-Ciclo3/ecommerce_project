@@ -3,7 +3,7 @@ import Auth from 'layouts/Auth';
 import Publico from 'layouts/Publico';
 import Login from 'pages/auth/Login';
 import Registro from 'pages/auth/Registro';
-import Usuarios from 'pages/admin/Usuarios;
+import Usuarios from 'pages/admin/Usuarios';
 import Ventas from 'pages/admin/Ventas';
 import MVentas from 'pages/admin/MVentas';
 import Productos from 'pages/admin/RegistroProductos';
