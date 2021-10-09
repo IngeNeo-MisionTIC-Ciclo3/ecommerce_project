@@ -6,16 +6,16 @@ const Ventas = () => {
 		<div className="flex flex-col items-center justify-center min-h-screen px-4 py-2 bg-gray-50 sm:px-6 lg:px-8">
 			<h2 className='mt-6 text-3xl font-extrabold text-center text-blue-600'>Registro de Venta</h2>
 			<form className='mt-8 space-y-8'>
-				<div className='grid grid-cols-4 gap-1 rounded-md shadow-sm text-center'>
+				<div className='grid grid-cols-4 gap-1 text-center rounded-md shadow-sm'>
 					<label></label>
 					<label></label>
 					<label></label>
-					<label htmlFor='factura'>Factura #  
+					<label htmlFor='factura'>Factura #
 						<h1 className='text-4xl'>FV-001</h1>
 					</label>
 				</div>
 				<div className='grid grid-cols-4 gap-4 rounded-md shadow-sm'>
-					<label htmlFor='id_cliente'>Identificación 
+					<label htmlFor='id_cliente'>Identificación
 					<input name='id_cliente' type='text' autoComplete='email' required="true"
 							className='relative block w-full px-1 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
 							placeholder='ID cliente'/>
@@ -36,7 +36,7 @@ const Ventas = () => {
 							placeholder='Nombre Vendedor'/>
 					</label>
 				</div>
-				<div className='grid grid-cols-5 gap-1 rounded-md shadow-sm text-center'>
+				<div className='grid grid-cols-5 gap-1 text-center rounded-md shadow-sm'>
 					<label htmlFor='id_producto'>ID Producto
 						<select className='relative block w-full px-1 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
 							placeholder='Nombre Vendedor'>
@@ -153,16 +153,16 @@ const Ventas = () => {
 					</div>
 				</div>
 
-				<div className='grid grid-cols-4 gap-1 rounded-md shadow-sm text-center'>
+				<div className='grid grid-cols-4 gap-1 text-center rounded-md shadow-sm'>
 					<label></label>
 					<label></label>
 					<label></label>
-					<label htmlFor='factura'>VALOR TOTAL  
+					<label htmlFor='factura'>VALOR TOTAL
 						<h1 className='text-4xl'>$ 12.450</h1>
 					</label>
 				</div>
 
-				<div className='grid grid-cols-5 gap-1 rounded-md shadow-sm text-center'>
+				<div className='grid grid-cols-5 gap-1 text-center rounded-md shadow-sm'>
 					<div></div>
 					<div></div>
 					<button type='submit'className='relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'>

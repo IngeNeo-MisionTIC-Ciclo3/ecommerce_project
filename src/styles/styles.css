@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tabla {
+	width: 100%;
+	margin: 10px;
+	overflow-y: scroll;
+	border-radius: 5px;
+}
+
+.tabla td,
+.tabla th {
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.tabla th {
+	--tw-bg-opacity: 1;
+    background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
+	/*background-color: #0e62b1;*/
+	color: black;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+}
+
+.tabla tr:nth-child(even) {
+	--tw-bg-opacity: 1;
+    background-color: rgba(239, 246, 255, var(--tw-bg-opacity));
+	/*background-color: #f2f2f2;*/
+}
+
+.tabla tr:hover {
+	background-color: rgb(96, 165, 250);
+	cursor: pointer;
+}
