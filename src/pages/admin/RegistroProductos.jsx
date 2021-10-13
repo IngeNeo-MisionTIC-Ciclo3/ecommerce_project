@@ -50,9 +50,11 @@ const RegistroProductos = () => {
 				</div>
 
 				<div className="px-24">
-					<button type="submit" className="relative flex justify-center w-full px-4 py-2 text-xs font-medium text-white bg-blue-600 border border-transparent rounded-md group hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" >
-						<Link to="#">Crear Producto</Link>
-					</button>
+					<Link to = '/admin/Mproductos'>
+						<button type="submit" className="relative flex justify-center w-full px-4 py-2 text-xs font-medium text-white bg-blue-600 border border-transparent rounded-md group hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" >
+							Crear Producto
+						</button>
+					</Link>
 				</div>
 			</form>
 		</div>
