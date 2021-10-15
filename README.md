@@ -2,21 +2,21 @@
 
 Desarrollado en React con  Create React App
 
-###Grupo 10 - Ciclo 3 MinTic - WhatsApp
+### Grupo 10 - Ciclo 3 MinTic - WhatsApp
 
-####Colaboradores – Sprint 3
-
-
-|  | Colaboradores                    | Interfaz                    |
-| ------------- | ------------------------------ |------------------------------ |
-| `1`   | Roger Alexis Valencia Garcia.       | Login, registro de usuario, Maestro de producto |
-| `2`   | Diana Marcela Pinilla Ortegón     | Registro de producto |
-| `3`   | Rafael Alejandro Lancheros Rodríguez     | Maestro de venta |
-| `4`   | Leidy Viviana Gallardo Rico     | Registro de venta |
-| `5`   | Javier Esteban Romero Medina     | Maestro de usuario |
+#### Colaboradores – Sprint 3
 
 
-###Link al tablero de Trello
+|     | Colaboradores                        | Interfaz -                                 |
+| --- | ------------------------------------ | ------------------------------------------ |
+| `1` | Roger Alexis Valencia Garcia.        | Maestro de producto                        |
+| `2` | Diana Marcela Pinilla Ortegón        | Registro de producto                       |
+| `3` | Rafael Alejandro Lancheros Rodríguez | Maestro de venta                           |
+| `4` | Leidy Viviana Gallardo Rico          | Registro de venta                          |
+| `5` | Javier Esteban Romero Medina         | Maestro de usuario                         |
+
+
+### Link al tablero de Trello
 
 `<link>` : [Tablero de Trello ](https://trello.com/invite/b/t2gHdrIk/a17019d3002206077d24e6f8f3b0bcd4/scrum-equipo-10 "Tablero de Trello")
 
@@ -41,7 +41,7 @@ Para esta interfaz podremos realizar el registro o movimiento de ventas de los p
 ##### Maestro de Ventas
 Para esta interfaz podremos realizar la actualización de la información de las ventas y conocer en todo momento el estado en que se encuentra el pedido y tener la trazabilidad de la operación
 
-###Comandos a ejecutar
+### Comandos a ejecutar
 
 Puedes comprobar tu versión de Node con el siguiente comando
 
@@ -62,7 +62,6 @@ Posterior al clonar el repositorio es necesario ejecutar el comando.
 Luego para tener el node_modules y actualizar las dependencias del proyecto ejecutamos.
 
 `$ yarn install`
-
 
 Aunque con el comando anterior el actualiza las dependencias del proyecto en el siguiente link esta la documentación de la librería tailwind y el paso a paso de su configuración de ser necesario, aunque ya se encuentra en el proyecto de este repositorio correctamente configurada.
 
