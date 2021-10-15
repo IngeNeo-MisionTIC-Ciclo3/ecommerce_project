@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { addProduct } from "utils/api";
+import { addProduct } from "utils/productos/api.productos";
 import { useHistory } from "react-router";
 
 const initialState = {

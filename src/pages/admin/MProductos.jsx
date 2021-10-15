@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
-import { obtenerProductos } from 'utils/api';
+import { obtenerProductos, editarProducto, eliminarProducto } from 'utils/productos/api.productos';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MProductos =() =>{
@@ -12,9 +11,21 @@ const MProductos =() =>{
 	const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
 	useEffect(() => {
+		const traerproductos = async () => {
+			await obtenerProductos(
+				(response) => {
+					console.log('la respuesta que se recibio fue', response);
+					setProductos(response.data);
+					setEjecutarConsulta(false);
+				},
+				(error) => {
+					console.error('Salio un error:', error);
+				}
+			);
+		};
 		console.log('consulta', ejecutarConsulta);
 		if (ejecutarConsulta) {
-			obtenerProductos(setProductos, setEjecutarConsulta);
+			traerproductos();
 		}
 	}, [ejecutarConsulta]);
 
@@ -62,6 +73,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
 				<table className='tabla'>
 					<thead>
 						<tr>
+							<th>Nombre del producto</th>
 							<th>Descripcion del producto</th>
 							<th>Valor Unitario</th>
 							<th>Cantidad</th>
@@ -86,10 +98,11 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
 				{productosFiltrados.map((el) => {
 					return (
 						<div className='flex flex-col p-2 m-2 bg-gray-400 shadow-xl rounded-xl'>
-							<span>{el.Descripcion}</span>
-							<span>{el.ValorU}</span>
-							<span>{el.Cantidad}</span>
-							<span>{el.Estado}</span>
+							<span>{el.nom_producto}</span>
+							<span>{el.descripcion}</span>
+							<span>{el.valorU}</span>
+							<span>{el.cantidad}</span>
+							<span>{el.estado}</span>
 						</div>
 					);
 				})}
@@ -102,54 +115,50 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 	const [edit, setEdit] = useState(false);
 	const [openDialog, setOpenDialog] = useState(false);
 	const [infoNuevoProducto, setInfoNuevoProducto] = useState({
-		Descripcion: producto.Descripcion,
-		ValorU: producto.ValorU,
-		Cantidad: producto.Cantidad,
-		Estado: producto.Estado,
+		nom_producto: producto.nom_producto,
+		descripcion: producto.descripcion,
+		valorU: producto.valorU,
+		cantidad: producto.cantidad,
+		estado: producto.estado,
 	});
 
 	const actualizarProducto = async () => {
 		//enviar la info al backend
-		const options = {
-			method: 'PATCH',
-			url: `http://localhost:5050/Productos/${producto._id}/`,
-			headers: { 'Content-Type': 'application/json' },
-			data: { ...infoNuevoProducto },
-		};
-
-		await axios
-			.request(options)
-			.then(function (response) {
+		await editarProducto(
+			producto._id,
+			{
+				nom_producto: infoNuevoProducto.nom_producto,
+				descripcion: infoNuevoProducto.descripcion,
+				valorU: infoNuevoProducto.valorU,
+				cantidad: infoNuevoProducto.cantidad,
+				estado: infoNuevoProducto.estado,
+			},
+			(response) => {
 				console.log(response.data);
 				toast.success('Producto modificado con éxito');
 				setEdit(false);
 				setEjecutarConsulta(true);
-			})
-			.catch(function (error) {
-				toast.error('Error modificando el producto');
+			},
+			(error) => {
+				toast.error('Error modificando el Producto');
 				console.error(error);
-			});
+			}
+		);
 	};
 
-	const eliminarProducto = async () => {
-		const options = {
-			method: 'DELETE',
-			url: `http://localhost:5050/Productos/${producto._id}/`,
-			headers: { 'Content-Type': 'application/json' },
-			data: { id: producto._id },
-		};
-
-		await axios
-			.request(options)
-			.then(function (response) {
+	const deleteProducto = async () => {
+		await eliminarProducto(
+			producto._id,
+			(response) => {
 				console.log(response.data);
-				toast.success('producto eliminado con éxito');
+				toast.success('Producto eliminado con éxito');
 				setEjecutarConsulta(true);
-			})
-			.catch(function (error) {
+			},
+			(error) => {
 				console.error(error);
-				toast.error('Error eliminando el producto');
-			});
+				toast.error('Error eliminando el Producto');
+			}
+		);
 		setOpenDialog(false);
 	};
 
@@ -161,17 +170,25 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 						<input
 							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
 							type='text'
-							value={infoNuevoProducto.Descripcion}
-							onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, Descripcion: e.target.value })}
+							value={infoNuevoProducto.nom_producto}
+							onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nom_producto: e.target.value })}
 						/>
 					</td>
 					<td>
 						<input
 							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
 							type='text'
-							value={infoNuevoProducto.ValorU}
+							value={infoNuevoProducto.descripcion}
+							onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcion: e.target.value })}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevoProducto.valorU}
 							onChange={(e) =>
-								setInfoNuevoProducto({ ...infoNuevoProducto, ValorU: e.target.value })
+								setInfoNuevoProducto({ ...infoNuevoProducto, valorU: e.target.value })
 							}
 						/>
 					</td>
@@ -179,9 +196,9 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 						<input
 							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
 							type='text'
-							value={infoNuevoProducto.Cantidad}
+							value={infoNuevoProducto.cantidad}
 							onChange={(e) =>
-								setInfoNuevoProducto({ ...infoNuevoProducto, Cantidad: e.target.value })
+								setInfoNuevoProducto({ ...infoNuevoProducto, cantidad: e.target.value })
 							}
 						/>
 					</td>
@@ -189,19 +206,20 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 						<input
 							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
 							type='text'
-							value={infoNuevoProducto.Estado}
+							value={infoNuevoProducto.estado}
 							onChange={(e) =>
-								setInfoNuevoProducto({ ...infoNuevoProducto, Estado: e.target.value })
+								setInfoNuevoProducto({ ...infoNuevoProducto, estado: e.target.value })
 							}
 						/>
 					</td>
 				</>
 			) : (
 				<>
-					<td>{producto.Descripcion}</td>
-					<td>{producto.ValorU}</td>
-					<td>{producto.Cantidad}</td>
-					<td>{producto.Estado}</td>
+					<td>{producto.nom_producto}</td>
+					<td>{producto.descripcion}</td>
+					<td>{producto.valorU}</td>
+					<td>{producto.cantidad}</td>
+					<td>{producto.estado}</td>
 				</>
 			)}
 			<td>
@@ -245,7 +263,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 						</h1>
 						<div className='flex items-center justify-center w-full my-4'>
 							<button
-								onClick={() => eliminarProducto()}
+								onClick={() => deleteProducto()}
 								className='px-4 py-2 mx-2 text-white bg-green-500 rounded-md shadow-md hover:bg-green-700'
 							>
 								Sí
