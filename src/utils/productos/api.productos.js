@@ -4,9 +4,9 @@ const url = "http://localhost:5050/Productos/";
 
 export const addProduct = async (data, successCallback, errorCallback) => {
 	const options = {
-		method = 'POST',
+		method: 'POST',
 		url,
-		headers : {'Content-Type':'aplication/json'},
+		headers: {'Content-Type':'aplication/json'},
 		data,
 	};
 	await axios.request(options).then(successCallback).catch(errorCallback);

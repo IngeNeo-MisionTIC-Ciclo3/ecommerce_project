@@ -3,9 +3,9 @@ import { addProduct } from "utils/productos/api.productos";
 import { ToastContainer, toast } from "react-toastify";
 
 const RegistroProductos = () => {
-	const forma = useRef(null);
+	const form = useRef(null);
 
-	const envioForm = async (e) => {
+	const envioinfo = async (e) => {
 		e.preventDefault();
 		const fd = new FormData(form.current);
 
@@ -41,7 +41,7 @@ const RegistroProductos = () => {
 			<h2 className="py-4 mt-6 text-3xl font-extrabold text-center text-blue-700">
 				Crear un nuevo producto
 			</h2>
-			<form ref={forma} onSubmit={envioinfo} className="flex flex-col">
+			<form ref={form} onSubmit={envioinfo} className="flex flex-col">
 				<label className="flex flex-col" htmlFor="nom_producto">
 					Nombre
 					<input name="nom_producto" type="text" placeholder="Nombre producto" className="p-2 m-2 border-blue-500 rounded-lg bg-blue-70" required="true"/>
