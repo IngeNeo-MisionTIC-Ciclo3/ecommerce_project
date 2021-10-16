@@ -1,7 +1,6 @@
 import React, {useRef} from "react";
 import { addProduct } from "utils/productos/api.productos";
 import { ToastContainer, toast } from "react-toastify";
-import prettyFormat from "pretty-format";
 
 const RegistroProductos = () => {
 	const forma = useRef(null);
@@ -28,7 +27,7 @@ const RegistroProductos = () => {
 			(res) => {
 				console.log (res.data);
 				toast.success('El producto ha sido agregado con exito');
-				e.target.resert();
+				e.target.reset();
 			},
 			(error) => {
 				console.log (error);
@@ -39,30 +38,30 @@ const RegistroProductos = () => {
 
 	return(
 		<div className="flex flex-col items-center min-h-screen px-4 py-2 bg-blue-70 sm:px-6 lg:px-8 ">
-			<h2 className=" py-4 mt-6 text-3xl font-extrabold text-center text-blue-700 ">
+			<h2 className="py-4 mt-6 text-3xl font-extrabold text-center text-blue-700 ">
 				Crear un nuevo producto
 			</h2>
 			<form ref={forma} onSubmit={envinf} className="flex flex-col">
 				<label className="flex flex-col" htmlFor="nom_producto">
 					Nombre
-					<input name="nom_producto" type="text" placeholder="Nombre producto" className="p-2 m-2 border-blue-500 rounded-lg bg-blue-100" required="true"/>
+					<input name="nom_producto" type="text" placeholder="Nombre producto" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true"/>
 				</label>
 				<label className="flex flex-col" htmlFor="descripcion">
 					Descripcion
-					<input name="descripcion" type="textarea" placeholder="Descripcion" className="p-2 m-2 border-blue-500 rounded-lg bg-blue-100" required="true" />
+					<input name="descripcion" type="textarea" placeholder="Descripcion" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true" />
 				</label>
 				<label className="flex flex-col" htmlFor="valorU">
 					Valor Unitario
-					<input name="valorU" type="number" placeholder="Valor Unitario" className="p-2 m-2 border-blue-500 rounded-lg bg-blue-100" required="true" />
+					<input name="valorU" type="number" placeholder="Valor Unitario" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true" />
 				</label>
 				<label className="flex flex-col" htmlFor="cantidad">
 					Cantidad
-					<input name="cantidad" type="number" placeholder="Cantidad" className="p-2 m-2 border-blue-500 rounded-lg bg-blue-100" />
+					<input name="cantidad" type="number" placeholder="Cantidad" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" />
 				</label>
-			
+
 				<label className="flex flex-col" htmlFor="estado">
 					Estado actual
-					<select name="estado" id="" className="p-2 m-2 border-blue-500 rounded-lg bg-blue-100" required defaultValue={0}>
+					<select name="estado" id="" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required defaultValue={0}>
 						<option disabled value={0}>
 							seleccione una opcion
 						</option>
