@@ -13,7 +13,7 @@ const initialState = {
 
 const RegistroProductos = () => {
 	const [producto, setproducto] = useState(initialState);
-	const {IdProducto, valorUnitario, cantidad, estado, descriProducto} = producto;
+	const {IdProducto, valorUnitario, cantidad, descriProducto} = producto;
 
 	let history = useHistory();
 
