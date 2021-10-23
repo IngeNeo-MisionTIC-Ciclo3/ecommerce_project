@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { obtenerUsuarios, editarUsuario, eliminarUsuario } from 'utils/usuarios/api.usuarios';
+import ComponentePrivado from 'components/ComponentePrivado';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MUsuarios = () => {
@@ -14,7 +15,6 @@ const MUsuarios = () => {
 		const traerusuarios = async () => {
 			await obtenerUsuarios(
 				(response) => {
-					console.log('La respuesta que se recibio fue', response);
 					setUsuarios(response.data);
 					setEjecutarConsulta(false);
 				},
@@ -30,7 +30,6 @@ const MUsuarios = () => {
 	}, [ejecutarConsulta]);
 
 	useEffect(() => {
-		//obtener lista de usuarios desde el backend
 		if (mostrarTabla) {
 			setEjecutarConsulta(true);
 		}
@@ -40,7 +39,6 @@ const MUsuarios = () => {
 		<div className='flex flex-col items-center justify-center w-full h-full p-8'>
 			<div className='flex flex-col w-full'>
 				<h2 className='text-3xl font-extrabold text-gray-900'>Página de administración de Usuarios</h2>
-
 			</div>
 			<TablaUsuarios listaUsuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} />
 			<ToastContainer position='bottom-center' autoClose={4000} />
@@ -80,11 +78,13 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
 							<th>Correo</th>
 							<th>Tipo de usuario</th>
 							<th>Estado</th>
-							<th>Acciones</th>
+							<ComponentePrivado listaRoles={['Administrador']}>
+								<th>Acciones</th>
+							</ComponentePrivado>
 						</tr>
 					</thead>
 					<tbody>
-					{usuariosFiltrados.map((usuario) => {
+						{usuariosFiltrados.map((usuario) => {
 							return (
 								<FilaUsuario
 									key={nanoid()}
@@ -102,9 +102,9 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
 						<div className='flex flex-col p-2 m-2 bg-gray-400 shadow-xl rounded-xl'>
 							<span>{el.tdocumento}</span>
 							<span>{el.ndocumento}</span>
-							<span>{el.nombres}</span>
+							<span>{el.name}</span>
 							<span>{el.telefono}</span>
-							<span>{el.correo}</span>
+							<span>{el.email}</span>
 							<span>{el.tusuario}</span>
 							<span>{el.estado}</span>
 						</div>
@@ -112,7 +112,7 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
 				})}
 			</div>
 		</div>
-);
+	);
 };
 
 const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
@@ -121,9 +121,9 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
 	const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
 		tdocumento: usuario.tdocumento,
 		ndocumento: usuario.ndocumento,
-		nombres: usuario.nombres,
+		name: usuario.name,
 		telefono: usuario.telefono,
-		correo: usuario.correo,
+		email: usuario.email,
 		tusuario: usuario.tusuario,
 		estado: usuario.estado,
 	});
@@ -135,9 +135,9 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
 			{
 				tdocumento: infoNuevoUsuario.tdocumento,
 				ndocumento: infoNuevoUsuario.ndocumento,
-				nombres: infoNuevoUsuario.nombres,
+				name: infoNuevoUsuario.name,
 				telefono: infoNuevoUsuario.telefono,
-				correo: infoNuevoUsuario.correo,
+				email: infoNuevoUsuario.email,
 				tusuario: infoNuevoUsuario.tusuario,
 				estado: infoNuevoUsuario.estado,
 			},
@@ -171,133 +171,100 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
 	};
 
 	return (
-		<tr>
+		<tr key={nanoid()}>
 			{edit ? (
 				<>
+					<td>{usuario.tdocumento}</td>
+					<td>{usuario.ndocumento}</td>
+					<td>{usuario.name}</td>
+					<td>{usuario.telefono}</td>
+					<td>{usuario.email}</td>
 					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevoUsuario.tdocumento}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, tdocumento: e.target.value })}
-						/>
+						<select name="tusuario" id="" defaultValue={infoNuevoUsuario.tusuario} onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, tusuario: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+							<option disabled value={0}>seleccione una opcion</option>
+							<option>Sin Rol</option>
+							<option>Administrador</option>
+							<option>Vendedor</option>
+						</select>
 					</td>
 					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='number'
-							value={infoNuevoUsuario.ndocumento}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, ndocumento: e.target.value })}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevoUsuario.nombres}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, nombres: e.target.value })}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='number'
-							value={infoNuevoUsuario.telefono}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, telefono: e.target.value })}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='email'
-							value={infoNuevoUsuario.correo}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, correo: e.target.value })}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevoUsuario.tusuario}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, tusuario: e.target.value })}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevoUsuario.estado}
-							onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })}
-						/>
+						<select name="estado" id="" defaultValue={infoNuevoUsuario.estado} onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+							<option disabled value={0}>seleccione una opcion</option>
+							<option>Pendiente</option>
+							<option>Autorizado</option>
+							<option>Rechazado</option>
+						</select>
 					</td>
 				</>
 			) : (
 				<>
 					<td>{usuario.tdocumento}</td>
 					<td>{usuario.ndocumento}</td>
-					<td>{usuario.nombres}</td>
+					<td>{usuario.name}</td>
 					<td>{usuario.telefono}</td>
-					<td>{usuario.correo}</td>
+					<td>{usuario.email}</td>
 					<td>{usuario.tusuario}</td>
 					<td>{usuario.estado}</td>
 				</>
 			)}
-			<td>
-				<div className='flex justify-around w-full'>
-					{edit ? (
-						<>
-							<Tooltip title='Confirmar Edición' arrow>
-								<i
-									onClick={() => actualizarUsuario()}
-									className='text-green-700 fas fa-check hover:text-green-500'
-								/>
-							</Tooltip>
-							<Tooltip title='Cancelar edición' arrow>
-								<i
-									onClick={() => setEdit(!edit)}
-									className='text-red-700 fas fa-ban hover:text-red-500'
-								/>
-							</Tooltip>
-						</>
-					) : (
-						<>
-							<Tooltip title='Editar Usuario' arrow>
-								<i
-									onClick={() => setEdit(!edit)}
-									className='text-yellow-700 fas fa-pencil-alt hover:text-yellow-500'
-								/>
-							</Tooltip>
-							<Tooltip title='Eliminar Usuario' arrow>
-								<i
-									onClick={() => setOpenDialog(true)}
-									className='text-red-700 fas fa-trash hover:text-red-500'
-								/>
-							</Tooltip>
-						</>
-					)}
-				</div>
-				<Dialog open={openDialog}>
-					<div className='flex flex-col p-8'>
-						<h1 className='text-2xl font-bold text-gray-900'>
-							¿Está seguro de querer eliminar el Usuario?
-						</h1>
-						<div className='flex items-center justify-center w-full my-4'>
-							<button
-								onClick={() => deleteUsuario()}
-								className='px-4 py-2 mx-2 text-white bg-green-500 rounded-md shadow-md hover:bg-green-700'
-							>
-								Sí
-							</button>
-							<button
-								onClick={() => setOpenDialog(false)}
-								className='px-4 py-2 mx-2 text-white bg-red-500 rounded-md shadow-md hover:bg-red-700'
-							>
-								No
-							</button>
-						</div>
+			<ComponentePrivado listaRoles={['Administrador']}>
+				<td>
+					<div className='flex justify-around w-full'>
+						{edit ? (
+							<>
+								<Tooltip title='Confirmar Edición' arrow>
+									<i
+										onClick={() => actualizarUsuario()}
+										className='text-green-700 fas fa-check hover:text-green-500'
+									/>
+								</Tooltip>
+								<Tooltip title='Cancelar edición' arrow>
+									<i
+										onClick={() => setEdit(!edit)}
+										className='text-red-700 fas fa-ban hover:text-red-500'
+									/>
+								</Tooltip>
+							</>
+						) : (
+							<>
+								<Tooltip title='Editar Usuario' arrow>
+									<i
+										onClick={() => setEdit(!edit)}
+										className='text-yellow-700 fas fa-pencil-alt hover:text-yellow-500'
+									/>
+								</Tooltip>
+								<Tooltip title='Eliminar Usuario' arrow>
+									<i
+										onClick={() => setOpenDialog(true)}
+										className='text-red-700 fas fa-trash hover:text-red-500'
+									/>
+								</Tooltip>
+							</>
+						)}
 					</div>
-				</Dialog>
-			</td>
+					<Dialog open={openDialog}>
+						<div className='flex flex-col p-8'>
+							<h1 className='text-2xl font-bold text-gray-900'>
+								¿Está seguro de querer eliminar el Usuario?
+							</h1>
+							<div className='flex items-center justify-center w-full my-4'>
+								<button
+									onClick={() => deleteUsuario()}
+									className='px-4 py-2 mx-2 text-white bg-green-500 rounded-md shadow-md hover:bg-green-700'
+								>
+									Sí
+								</button>
+								<button
+									onClick={() => setOpenDialog(false)}
+									className='px-4 py-2 mx-2 text-white bg-red-500 rounded-md shadow-md hover:bg-red-700'
+								>
+									No
+								</button>
+							</div>
+						</div>
+					</Dialog>
+				</td>
+			</ComponentePrivado>
 		</tr>
 	);
 };
