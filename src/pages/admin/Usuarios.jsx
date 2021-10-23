@@ -36,7 +36,7 @@ const MUsuarios = () => {
 	}, [mostrarTabla]);
 
 	return (
-		<div className='flex flex-col items-center justify-center w-full h-full p-8'>
+		<div className='flex flex-col items-center justify-center w-full h-full p-8 musuarios'>
 			<div className='flex flex-col w-full'>
 				<h2 className='text-3xl font-extrabold text-gray-900'>Página de administración de Usuarios</h2>
 			</div>
