@@ -55,7 +55,7 @@ const Ruta = ({ icono, ruta, nombre, usuario }) => {
 	return (
 		<Link to={ruta}>
 			<button
-				className={`flex w-full p-4 my-2 bg-${isActive ? 'blue' : 'gray'}-700 hover:bg-blue-900 justify-items-stretch text-white rounded-md`}>
+				className={`flex w-full p-4 my-2 bg-${isActive ? 'blue' : 'gray'}-700 hover:bg-blue-900 justify-items-stretch text-white rounded-md border-red-900 solid`}>
 				{usuario ? (
 					<>
 						<img src={usuario.picture} className='w-5 h-5 mx-2 rounded-full' alt='perfil' />
