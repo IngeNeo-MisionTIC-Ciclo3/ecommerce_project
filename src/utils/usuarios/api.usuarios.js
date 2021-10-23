@@ -1,31 +1,75 @@
 import axios from 'axios';
 
-const url = "http://localhost:5050/Usuarios/";
+//Definimos una función para la ruta de nuestra API
+//const url = "http://localhost:5050";
+const url = "https://fathomless-castle-92562.herokuapp.com";
 
-export const addUser = async (usuario) => {
-	return await axios.post (`${url}/`,usuario);
+//Consultamos el Token almacenado en el LocalStorage
+const traerToken = ()=>{
+	return `Bearer ${localStorage.getItem('Token')}`;
 }
 
-export const obtenerUsuarios = async (successCallback, errorCallback) => {
-	const options = { method: 'GET', url: 'http://localhost:5050/usuarios/' };
-	await axios.request(options).then(successCallback).catch(errorCallback);
-};
-
-export const editarUsuario = async (id, data, successCallback, errorCallback) => {
+//Para todas las petición enviamos en el header la autorizacion del token en la propiedad Authorization: traerToken(),
+export const addUser = async (data, successCallback, errorCallback) => {
 	const options = {
-		method: 'PATCH',
-		url: `http://localhost:5050/usuarios/${id}/`,
-		headers: { 'Content-Type': 'application/json' },
+		method: 'POST',
+		url : `${url}/usuarios/`,
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: traerToken(),
+		},
 		data,
 	};
 	await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+//Para todas las petición enviamos en el header la autorizacion del token en la propiedad Authorization: traerToken(),
+export const obtenerUsuarios = async (successCallback, errorCallback) => {
+	const options = {
+		method: 'GET',
+		url: `${url}/usuarios/`,
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: traerToken(),
+		}, };
+	await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+//Para todas las petición enviamos en el header la autorizacion del token en la propiedad Authorization: traerToken(),
+export const obtenerEsteUsuario = async (successCallback, errorCallback) => {
+	const options = {
+		method: 'GET',
+		url: `${url}/usuarios/iam`,
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: traerToken(),
+		}, };
+	await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+//Para todas las petición enviamos en el header la autorizacion del token en la propiedad Authorization: traerToken(),
+export const editarUsuario = async (id, data, successCallback, errorCallback) => {
+	const options = {
+		method: 'PATCH',
+		url: `${url}/usuarios/${id}/`,
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: traerToken(),
+		},
+		data,
+	};
+	await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+//Para todas las petición enviamos en el header la autorizacion del token en la propiedad Authorization: traerToken(),
 export const eliminarUsuario = async (id, successCallback, errorCallback) => {
 	const options = {
 		method: 'DELETE',
-		url: `http://localhost:5050/usuarios/${id}/`,
-		headers: { 'Content-Type': 'application/json' },
+		url: `${url}/usuarios/${id}/`,
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: traerToken(),
+		},
 	};
 	await axios.request(options).then(successCallback).catch(errorCallback);
 };

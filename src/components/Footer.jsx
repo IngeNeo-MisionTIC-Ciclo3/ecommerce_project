@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Creamos componente para el pie de pagina
 const Footer = () => {
 	return (
 		<footer className='flex justify-center w-full py-2'>
