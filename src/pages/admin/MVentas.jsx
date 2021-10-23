@@ -1,88 +1,324 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { nanoid } from 'nanoid';
+import { Dialog, Tooltip } from '@material-ui/core';
+import { obtenerVentas, editarVentas, eliminarVentas } from 'utils/ventas/api.ventas';
+import 'react-toastify/dist/ReactToastify.css';
 
-const MVentas =() => {
-    return (
+const Mventas =() =>{
+	const [mostrarTabla] = useState(true);
+	const [ventas, setVentas] = useState([]);
+	const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
-    <div className= "container mx-auto mt-5 text-center">
-        <h2 className='mt-6 text-3xl font-extrabold text-center text-blue-600'>MAESTRO DE VENTAS</h2>
-     
-        <table className="table-fixed border-2 border-blue-500 border-opacity-75 md:border-opacity-50">
-            <thead>
-                <tr>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">ID</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Nombre del Cliente</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">ID Venta</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Fecha de Venta</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Producto</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Cantidad</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Valor Unitario</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Valor Total</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Vendedor</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Estado</th>
-                    <th className="border border-blue-600 px-4 py-2 text-blue-900">Acciones</th>
-                </tr>
-            </thead>
+	useEffect(() => {
+		const traerVentas = async () => {
+			await obtenerVentas(
+				(response) => {
+					console.log('la respuesta que se recibio fue', response);
+					setVentas(response.data);
+					setEjecutarConsulta(false);
+				},
+				(error) => {
+					console.error('Salio un error:', error);
+				}
+			);
+		};
+		console.log('consulta', ejecutarConsulta);
+		if (ejecutarConsulta) {
+			traerVentas();
+		}
+	}, [ejecutarConsulta]);
 
-            <tbody>
-                <tr className="bg-blue-200">
-                    <th className="border border-gray-200 w-auto px-1 py-1">60987761</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">John Tyler</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">001</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">29-09-21</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Jeans</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">3</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$80000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$240000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Leidy Gallardo</th>
-                    <th className="border border-blue-600 w-auto px-1 py-1">Despachado</th>
-                    <th className="grid grid-flow-col grid-cols-1 gap-4 place-content-stretch bg-green-600 opacity-100 border border-green-900 px-4 py-2">Modificar</th>
-                </tr>
+	useEffect(() => {
+		//obtener lista de ventas desde el backend
+		if (mostrarTabla) {
+			setEjecutarConsulta(true);
+		}
+	}, [mostrarTabla]);
 
-                <tr>
-                    <th className="border border-gray-200 w-auto px-1 py-1">1098765432</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Sam Miller</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">002</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">30-09-21</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Camisetas</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">5</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$25000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$125000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Leidy Gallardo</th>
-                    <th className="border border-blue-600 w-auto px-1 py-1">Facturado</th>
-                    <th className="grid grid-flow-col grid-cols-1 gap-4 place-content-stretch bg-green-600 opacity-100 border border-green-900 px-4 py-2">Modificar</th>
-                </tr>
+	return (
+		<div className='flex flex-col items-center justify-center w-full h-full p-8'>
+			<div className='flex flex-col w-full'>
+				<h2 className='text-3xl font-extrabold text-gray-900'>Página de administración de Ventas</h2>
 
-                <tr className="bg-blue-200">
-                    <th className="border border-gray-200 w-auto px-1 py-1">1094321765</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Tom Carter</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">003</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">1-10-21</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Sweater</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">1</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$120000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$120000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Leidy Gallardo</th>
-                    <th className="border border-blue-600 w-auto px-1 py-1">En proceso</th>
-                    <th className="grid grid-flow-col grid-cols-1 gap-4 place-content-stretch bg-green-600 opacity-100 border border-green-900 px-4 py-2">Modificar</th>
-                </tr>
-
-                <tr>
-                    <th className="border border-gray-200 w-auto px-1 py-1">88765234</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Michael Park</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">004</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">1-10-21</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Jean</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">2</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$80000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">$160000</th>
-                    <th className="border border-gray-200 w-auto px-1 py-1">Leidy Gallardo</th>
-                    <th className="border border-blue-600 w-auto px-1 py-1">Despachado</th>
-                    <th className="grid grid-flow-col grid-cols-1 gap-8 place-content-stretch bg-green-600 opacity-100 border border-green-900 px-1 py-1">Modificar</th>
-                </tr>
-            </tbody>
-        </table>
-    </div>        
-    );
+			</div>
+			<TablaVentas listaVentas={ventas} setEjecutarConsulta={setEjecutarConsulta} />
+			<ToastContainer position='bottom-center' autoClose={4000} />
+		</div>
+	);
 };
 
-export default MVentas;
+const TablaVentas = ({ listaVentas, setEjecutarConsulta }) => {
+	const [busqueda, setBusqueda] = useState('');
+	const [ventasFiltradas, setVentasFiltradas] = useState(listaVentas);
+
+	useEffect(() => {
+		setVentasFiltradas(
+			listaVentas.filter((elemento) => {
+				return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+			})
+		);
+	}, [busqueda, listaVentas]);
+
+	return (
+		<div className='flex flex-col items-center justify-center w-full'>
+			<input
+				value={busqueda}
+				onChange={(e) => setBusqueda(e.target.value)}
+				placeholder='Buscar'
+				className='self-start px-3 py-1 border-2 border-gray-700 rounded-md focus:outline-none focus:border-blue-500'
+			/>
+			<h2 className='text-2xl font-extrabold text-gray-800'>Todas las Ventas</h2>
+			<div className='hidden w-full md:flex'>
+				<table className='tabla'>
+					<thead>
+						<tr>
+							<th>ID del Cliente</th>
+							<th>Nombre del Cliente</th>
+							<th>Nombre del Vendedor</th>
+							<th>Descripcion del producto</th>
+							<th>Valor Unitario</th>
+							<th>Cantidad</th>
+							<th>Valor Total</th>
+							<th>Estado</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						{ventasFiltradas.map((venta) => {
+							return (
+								<FilaVenta
+									key={nanoid()}
+									venta={venta}
+									setEjecutarConsulta={setEjecutarConsulta}
+								/>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+			<div className='flex flex-col w-full m-2 md:hidden'>
+				{ventasFiltradas.map((el) => {
+					return (
+						<div className='flex flex-col p-2 m-2 bg-gray-400 shadow-xl rounded-xl'>
+							<span>{el.id_cliente}</span>
+							<span>{el.nom_cliente}</span>
+							<span>{el.nom_vendedor}</span>
+							<span>{el.nom_producto}</span>
+							<span>{el.v_unitario}</span>
+							<span>{el.cantidad}</span>
+							<span>{el.v_total}</span>
+							<span>{el.estado}</span>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
+};
+
+const FilaVenta = ({ venta, setEjecutarConsulta }) => {
+	const [edit, setEdit] = useState(false);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [infoNuevaVenta, setInfoNuevaVenta] = useState({
+		id_cliente: venta.id_cliente,
+		nom_cliente: venta.nom_cliente,
+		nom_vendedor: venta.nom_vendedor,
+		nom_producto: venta.nom_producto,
+		v_unitario: venta.v_unitario,
+		cantidad: venta.cantidad,
+		v_total: venta.v_total,
+		estado: venta.estado,
+	});
+
+	const actualizarVenta = async () => {
+		//enviar la info al backend
+		await editarVentas(
+			venta._id,
+			{
+				id_cliente: infoNuevaVenta.id_cliente,
+				nom_cliente: infoNuevaVenta.nom_cliente,
+				nom_vendedor: infoNuevaVenta.nom_vendedor,
+				nom_producto: infoNuevaVenta.nom_producto,
+				v_unitario: infoNuevaVenta.v_unitario,
+				cantidad: infoNuevaVenta.cantidad,
+				v_total: infoNuevaVenta.v_total,
+				estado: infoNuevaVenta.estado,
+			},
+			(response) => {
+				console.log(response.data);
+				toast.success('venta modificada con éxito');
+				setEdit(false);
+				setEjecutarConsulta(true);
+			},
+			(error) => {
+				toast.error('Error modificando la venta');
+				console.error(error);
+			}
+		);
+	};
+
+	const deleteVenta = async () => {
+		await eliminarVentas(
+			venta._id,
+			(response) => {
+				console.log(response.data);
+				toast.success('venta eliminada con éxito');
+				setEjecutarConsulta(true);
+			},
+			(error) => {
+				console.error(error);
+				toast.error('Error eliminando la venta');
+			}
+		);
+		setOpenDialog(false);
+	};
+
+	return (
+		<tr>
+			{edit ? (
+				<>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.id_cliente}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, id_cliente: e.target.value })}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.nom_cliente}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nom_cliente: e.target.value })}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.nom_vendedor}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nom_vendedor: e.target.value })
+							}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.nom_producto}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nom_producto: e.target.value })
+							}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.v_unitario}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, v_unitario: e.target.value })
+							}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.cantidad}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, cantidad: e.target.value })
+							}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.v_total}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, v_total: e.target.value })
+							}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							type='text'
+							value={infoNuevaVenta.estado}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estado: e.target.value })
+							}
+						/>
+					</td>
+				</>
+			) : (
+				<>
+					<td>{venta.id_cliente}</td>
+					<td>{venta.nom_cliente}</td>
+					<td>{venta.nom_vendedor}</td>
+					<td>{venta.nom_producto}</td>
+					<td>{venta.v_unitario}</td>
+					<td>{venta.cantidad}</td>
+					<td>{venta.v_total}</td>
+					<td>{venta.estado}</td>
+				</>
+			)}
+			<td>
+				<div className='flex justify-around w-full'>
+					{edit ? (
+						<>
+							<Tooltip title='Confirmar Edición' arrow>
+								<i
+									onClick={() => actualizarVenta()}
+									className='text-green-700 fas fa-check hover:text-green-500'
+								/>
+							</Tooltip>
+							<Tooltip title='Cancelar edición' arrow>
+								<i
+									onClick={() => setEdit(!edit)}
+									className='text-red-700 fas fa-ban hover:text-red-500'
+								/>
+							</Tooltip>
+						</>
+					) : (
+						<>
+							<Tooltip title='Editar venta' arrow>
+								<i
+									onClick={() => setEdit(!edit)}
+									className='text-yellow-700 fas fa-pencil-alt hover:text-yellow-500'
+								/>
+							</Tooltip>
+							<Tooltip title='Eliminar venta' arrow>
+								<i
+									onClick={() => setOpenDialog(true)}
+									className='text-red-700 fas fa-trash hover:text-red-500'
+								/>
+							</Tooltip>
+						</>
+					)}
+				</div>
+				<Dialog open={openDialog}>
+					<div className='flex flex-col p-8'>
+						<h1 className='text-2xl font-bold text-gray-900'>
+							¿Está seguro de querer eliminar la venta?
+						</h1>
+						<div className='flex items-center justify-center w-full my-4'>
+							<button
+								onClick={() => deleteVenta()}
+								className='px-4 py-2 mx-2 text-white bg-green-500 rounded-md shadow-md hover:bg-green-700'
+							>
+								Sí
+							</button>
+							<button
+								onClick={() => setOpenDialog(false)}
+								className='px-4 py-2 mx-2 text-white bg-red-500 rounded-md shadow-md hover:bg-red-700'
+							>
+								No
+							</button>
+						</div>
+					</div>
+				</Dialog>
+			</td>
+		</tr>
+	);
+};
+
+export default Mventas;

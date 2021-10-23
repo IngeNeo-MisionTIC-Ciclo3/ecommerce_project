@@ -1,62 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useRef} from "react";
+import { addProduct } from "utils/productos/api.productos";
+import { ToastContainer, toast } from "react-toastify";
 
 const RegistroProductos = () => {
-	return (
-		<div className="flex flex-col items-center justify-center min-h-screen px-4 py-2 bg-gray-50 sm:px-6 lg:px-8">
-			<h2 className="mt-6 text-3xl font-extrabold text-center text-blue-600">
-				Creación de Productos
+	const forma = useRef(null);
+
+	const envinf = async (e) => {
+		e.preventDefault();
+		const fd = new FormData(forma.current);
+
+		const nuevoProducto ={};
+		fd.forEach ((value, key) => {
+			nuevoProducto[key] = value;
+		});
+
+		const dProducto = {
+			nom_producto: nuevoProducto.nom_producto,
+			descripcion: nuevoProducto.descripcion,
+			valorU: nuevoProducto.valorU,
+			cantidad: nuevoProducto.cantidad,
+			estado: nuevoProducto.estado,
+		};
+
+		await addProduct (
+			dProducto,
+			(res) => {
+				console.log (res.data);
+				toast.success('El producto ha sido agregado con exito');
+				e.target.reset();
+			},
+			(error) => {
+				console.log (error);
+				toast.error('Error no se puede crear el producto');
+			}
+		);
+	};
+
+	return(
+		<div className="flex flex-col items-center min-h-screen px-4 py-2 bg-blue-70 sm:px-6 lg:px-8 ">
+			<h2 className="py-4 mt-6 text-3xl font-extrabold text-center text-blue-700 ">
+				Crear un nuevo producto
 			</h2>
-			<form className="w-4/12 mt-4 space-y-3 text-xs">
-				<div className="grid grid-cols-2 rounded-md shadow-md gap 5">
-					<label className="px-3 mt-4 mb-3" htmlFor="IdProducto">
-						{" "}
-						ID o Código
-						<input name="IdProducto" type="number" required="true"
-							className="relative block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-xs"/>
-					</label>
+			<form ref={forma} onSubmit={envinf} className="flex flex-col">
+				<label className="flex flex-col" htmlFor="nom_producto">
+					Nombre
+					<input name="nom_producto" type="text" placeholder="Nombre producto" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true"/>
+				</label>
+				<label className="flex flex-col" htmlFor="descripcion">
+					Descripcion
+					<input name="descripcion" type="textarea" placeholder="Descripcion" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true" />
+				</label>
+				<label className="flex flex-col" htmlFor="valorU">
+					Valor Unitario
+					<input name="valorU" type="number" placeholder="Valor Unitario" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true" />
+				</label>
+				<label className="flex flex-col" htmlFor="cantidad">
+					Cantidad
+					<input name="cantidad" type="number" placeholder="Cantidad" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" />
+				</label>
 
-					<label className="px-3 mt-4" htmlFor="valorUnitario">
-						{" "}
-						Valor Unitario
-						<input name="valorUnitario" type="number" required="true"
-							className="relative block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-xs" />
-					</label>
+				<label className="flex flex-col" htmlFor="estado">
+					Estado actual
+					<select name="estado" id="" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required defaultValue={0}>
+						<option disabled value={0}>
+							seleccione una opcion
+						</option>
+						<option>Disponible</option>
+						<option>No Disponible</option>
+					</select>
+				</label>
+				<button
+					type='submit'
+					className='col-span-2 p-2 m-3 text-black bg-blue-500 rounded-full shadow-md hover:bg-blue-600'
+				>
+					Guardar Producto
+				</button>
+				<ToastContainer position='bottom-center' autoClose={4000} />
 
-					<label className="px-3 mb-3" htmlFor="cantidad">
-						{" "}
-						Cantidad
-						<input name="cantidad" type="number" required="false"
-							className="relative block w-full px-3 py-2 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-xs" placeholder="Opcional" />
-					</label>
-
-					<label class="mb-3 px-3 block text-left" htmlFor="cantidad">
-						{" "}
-						Estado
-						<span class="text-gray-900"></span>
-						<select class="form-select block w-full mt-1 relative px-3 py-2 text-gray-900 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-xs">
-							<option></option>
-							<option>Disponible</option>
-							<option>No Disponible</option>
-						</select>
-					</label>
-
-					<label className="block px-3 mb-4 text-left" htmlFor="descriProducto">
-						{" "}
-						Descripción
-						<textarea name="descriProducto" type="text" required="true"
-							className="relative block h-20 px-2 py-2 mt-1 text-gray-900 placeholder-gray-500 border rounded-none appearance-none w-80 border-gray-10 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-10 focus:z-10 sm:text-xs" placeholder="Describe brevemente el producto..." />
-					</label>
-				</div>
-
-				<div className="px-24">
-					<button type="submit" className="relative flex justify-center w-full px-4 py-2 text-xs font-medium text-white bg-blue-600 border border-transparent rounded-md group hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" >
-						<Link to="#">Crear Producto</Link>
-					</button>
-				</div>
 			</form>
+
 		</div>
-	);
+
+	)
 };
 
 export default RegistroProductos;
