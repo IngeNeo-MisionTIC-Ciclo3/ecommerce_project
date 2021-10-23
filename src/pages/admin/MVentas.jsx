@@ -4,8 +4,9 @@ import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { obtenerVentas, editarVentas, eliminarVentas } from 'utils/ventas/api.ventas';
 import 'react-toastify/dist/ReactToastify.css';
+import ComponentePrivado from 'components/ComponentePrivado';
 
-const Mventas =() =>{
+const Mventas = () => {
 	const [mostrarTabla] = useState(true);
 	const [ventas, setVentas] = useState([]);
 	const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
@@ -30,7 +31,6 @@ const Mventas =() =>{
 	}, [ejecutarConsulta]);
 
 	useEffect(() => {
-		//obtener lista de ventas desde el backend
 		if (mostrarTabla) {
 			setEjecutarConsulta(true);
 		}
@@ -72,16 +72,17 @@ const TablaVentas = ({ listaVentas, setEjecutarConsulta }) => {
 			<div className='hidden w-full md:flex'>
 				<table className='tabla'>
 					<thead>
-						<tr>
+						<tr key={nanoid()}>
 							<th>ID del Cliente</th>
 							<th>Nombre del Cliente</th>
 							<th>Nombre del Vendedor</th>
 							<th>Descripcion del producto</th>
-							<th>Valor Unitario</th>
-							<th>Cantidad</th>
+							<th>Fecha de venta</th>
 							<th>Valor Total</th>
 							<th>Estado</th>
-							<th>Acciones</th>
+							<ComponentePrivado listaRoles={['Administrador', 'Vendedor']}>
+								<th>Acciones</th>
+							</ComponentePrivado>
 						</tr>
 					</thead>
 					<tbody>
@@ -105,8 +106,7 @@ const TablaVentas = ({ listaVentas, setEjecutarConsulta }) => {
 							<span>{el.nom_cliente}</span>
 							<span>{el.nom_vendedor}</span>
 							<span>{el.nom_producto}</span>
-							<span>{el.v_unitario}</span>
-							<span>{el.cantidad}</span>
+							<span>{el.fecha}</span>
 							<span>{el.v_total}</span>
 							<span>{el.estado}</span>
 						</div>
@@ -125,8 +125,6 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 		nom_cliente: venta.nom_cliente,
 		nom_vendedor: venta.nom_vendedor,
 		nom_producto: venta.nom_producto,
-		v_unitario: venta.v_unitario,
-		cantidad: venta.cantidad,
 		v_total: venta.v_total,
 		estado: venta.estado,
 	});
@@ -140,8 +138,6 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 				nom_cliente: infoNuevaVenta.nom_cliente,
 				nom_vendedor: infoNuevaVenta.nom_vendedor,
 				nom_producto: infoNuevaVenta.nom_producto,
-				v_unitario: infoNuevaVenta.v_unitario,
-				cantidad: infoNuevaVenta.cantidad,
 				v_total: infoNuevaVenta.v_total,
 				estado: infoNuevaVenta.estado,
 			},
@@ -175,7 +171,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 	};
 
 	return (
-		<tr>
+		<tr key={nanoid()}>
 			{edit ? (
 				<>
 					<td>
@@ -215,38 +211,19 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 					<td>
 						<input
 							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevaVenta.v_unitario}
-							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, v_unitario: e.target.value })
-							}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevaVenta.cantidad}
-							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, cantidad: e.target.value })
-							}
-						/>
-					</td>
-					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
+							type='number'
 							value={infoNuevaVenta.v_total}
 							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, v_total: e.target.value })
 							}
 						/>
 					</td>
 					<td>
-						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
-							type='text'
-							value={infoNuevaVenta.estado}
-							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estado: e.target.value })
-							}
-						/>
+						<select name="estado" id="" defaultValue={infoNuevaVenta.estado} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+							<option disabled value={0}>seleccione una opcion</option>
+							<option>En Proceso</option>
+							<option>Entregada</option>
+							<option>Cancelada</option>
+						</select>
 					</td>
 				</>
 			) : (
@@ -255,8 +232,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 					<td>{venta.nom_cliente}</td>
 					<td>{venta.nom_vendedor}</td>
 					<td>{venta.nom_producto}</td>
-					<td>{venta.v_unitario}</td>
-					<td>{venta.cantidad}</td>
+					<td>{venta.fecha}</td>
 					<td>{venta.v_total}</td>
 					<td>{venta.estado}</td>
 				</>
@@ -264,7 +240,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 			<td>
 				<div className='flex justify-around w-full'>
 					{edit ? (
-						<>
+						<ComponentePrivado listaRoles={['Administrador', 'Vendedor']}>
 							<Tooltip title='Confirmar Edición' arrow>
 								<i
 									onClick={() => actualizarVenta()}
@@ -277,21 +253,25 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 									className='text-red-700 fas fa-ban hover:text-red-500'
 								/>
 							</Tooltip>
-						</>
+						</ComponentePrivado>
 					) : (
 						<>
-							<Tooltip title='Editar venta' arrow>
-								<i
-									onClick={() => setEdit(!edit)}
-									className='text-yellow-700 fas fa-pencil-alt hover:text-yellow-500'
-								/>
-							</Tooltip>
-							<Tooltip title='Eliminar venta' arrow>
-								<i
-									onClick={() => setOpenDialog(true)}
-									className='text-red-700 fas fa-trash hover:text-red-500'
-								/>
-							</Tooltip>
+							<ComponentePrivado listaRoles={['Administrador', 'Vendedor']}>
+								<Tooltip title='Editar venta' arrow>
+									<i
+										onClick={() => setEdit(!edit)}
+										className='text-yellow-700 fas fa-pencil-alt hover:text-yellow-500'
+									/>
+								</Tooltip>
+								</ComponentePrivado>
+								<ComponentePrivado listaRoles={['Administrador']}>
+								<Tooltip title='Eliminar venta' arrow>
+									<i
+										onClick={() => setOpenDialog(true)}
+										className='text-red-700 fas fa-trash hover:text-red-500'
+									/>
+								</Tooltip>
+							</ComponentePrivado>
 						</>
 					)}
 				</div>
