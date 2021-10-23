@@ -50,7 +50,10 @@
 	color: #000;
 }
 
-
+.menu{
+	--tw-bg-opacity: 0.5;
+	background-color: rgba(198, 183, 255, var(--tw-bg-opacity));
+}
 
 .login {
 	background: url(../media/login.jpg);
