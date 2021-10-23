@@ -37,9 +37,7 @@ const MUsuarios = () => {
 
 	return (
 		<div className='flex flex-col items-center justify-center w-full h-full p-8 musuarios'>
-			<div className='flex flex-col w-full'>
-				<h2 className='text-3xl font-extrabold text-gray-900'>Página de administración de Usuarios</h2>
-			</div>
+			<h2 className='text-4xl font-extrabold text-gray-50'>Página de administración de Usuarios</h2>
 			<TablaUsuarios listaUsuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} />
 			<ToastContainer position='bottom-center' autoClose={4000} />
 		</div>
@@ -66,7 +64,6 @@ const TablaUsuarios = ({ listaUsuarios, setEjecutarConsulta }) => {
 				placeholder='Buscar'
 				className='self-start px-3 py-1 border-2 border-gray-700 rounded-md focus:outline-none focus:border-blue-500'
 			/>
-			<h2 className='text-2xl font-extrabold text-gray-800'>Todos los Usuarios</h2>
 			<div className='hidden w-full md:flex'>
 				<table className='tabla'>
 					<thead>
@@ -180,7 +177,7 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
 					<td>{usuario.telefono}</td>
 					<td>{usuario.email}</td>
 					<td>
-						<select name="tusuario" id="" defaultValue={infoNuevoUsuario.tusuario} onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, tusuario: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+						<select name="tusuario" id="" defaultValue={infoNuevoUsuario.tusuario} onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, tusuario: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg select" required>
 							<option disabled value={0}>seleccione una opcion</option>
 							<option>Sin Rol</option>
 							<option>Administrador</option>
@@ -188,7 +185,7 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
 						</select>
 					</td>
 					<td>
-						<select name="estado" id="" defaultValue={infoNuevoUsuario.estado} onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+						<select name="estado" id="" defaultValue={infoNuevoUsuario.estado} onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg select" required>
 							<option disabled value={0}>seleccione una opcion</option>
 							<option>Pendiente</option>
 							<option>Autorizado</option>

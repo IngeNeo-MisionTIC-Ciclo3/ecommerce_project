@@ -29,7 +29,8 @@ function App() {
 		<Auth0Provider
 			domain='ingeneomisionticciclo3ecommerceproject.us.auth0.com'
 			clientId='1rCaefPr0j6RjQsGzrmJKPcGcunKCHiW'
-			redirectUri='https://mighty-escarpment-28176.herokuapp.com/admin'
+			//redirectUri='https://mighty-escarpment-28176.herokuapp.com/admin'
+			redirectUri='http://localhost:3000/admin'
 			audience='API-Ecommerce-Project'
 		>
 			<div className='App'>

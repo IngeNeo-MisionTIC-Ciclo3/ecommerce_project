@@ -37,31 +37,33 @@ const RegistroProductos = () => {
 	};
 
 	return(
-		<div className="flex flex-col items-center min-h-screen px-4 py-2 bg-blue-70 sm:px-6 lg:px-8 ">
-			<h2 className="py-4 mt-6 text-3xl font-extrabold text-center text-blue-700 ">
+		<div className="flex flex-col items-center min-h-screen px-4 py-2 bg-purple-70 sm:px-6 lg:px-8 productos">
+			<div className='py-5 my-5'>
+				<h2 className="py-4 mt-6 text-3xl font-extrabold text-center text-purple-50 ">
 				Crear un nuevo producto
 			</h2>
-			<form ref={forma} onSubmit={envinf} className="flex flex-col">
-				<label className="flex flex-col" htmlFor="nom_producto">
+			</div>
+			<form ref={forma} onSubmit={envinf} className="flex flex-col px-10 mx-10 opaco">
+				<label className="flex flex-col text-gray-50" htmlFor="nom_producto">
 					Nombre
-					<input name="nom_producto" type="text" placeholder="Nombre producto" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true"/>
+					<input name="nom_producto" type="text" placeholder="Nombre producto" className="p-2 m-2 text-black bg-purple-100 border-purple-500 rounded-lg" required="true"/>
 				</label>
-				<label className="flex flex-col" htmlFor="descripcion">
+				<label className="flex flex-col text-gray-50" htmlFor="descripcion">
 					Descripcion
-					<input name="descripcion" type="textarea" placeholder="Descripcion" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true" />
+					<input name="descripcion" type="textarea" placeholder="Descripcion" className="p-2 m-2 text-black bg-purple-100 border-purple-500 rounded-lg" required="true" />
 				</label>
-				<label className="flex flex-col" htmlFor="valorU">
+				<label className="flex flex-col text-gray-50" htmlFor="valorU">
 					Valor Unitario
-					<input name="valorU" type="number" placeholder="Valor Unitario" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required="true" />
+					<input name="valorU" type="number" placeholder="Valor Unitario" className="p-2 m-2 text-black bg-purple-100 border-purple-500 rounded-lg" required="true" />
 				</label>
-				<label className="flex flex-col" htmlFor="cantidad">
+				<label className="flex flex-col text-gray-50" htmlFor="cantidad">
 					Cantidad
-					<input name="cantidad" type="number" placeholder="Cantidad" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" />
+					<input name="cantidad" type="number" placeholder="Cantidad" className="p-2 m-2 text-black bg-purple-100 border-purple-500 rounded-lg" />
 				</label>
 
-				<label className="flex flex-col" htmlFor="estado">
+				<label className="flex flex-col text-gray-50" htmlFor="estado">
 					Estado actual
-					<select name="estado" id="" className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required defaultValue={0}>
+					<select name="estado" id="" className="p-2 m-2 bg-purple-100 border-purple-500 rounded-lg" required defaultValue={0}>
 						<option disabled value={0}>
 							seleccione una opcion
 						</option>
@@ -71,7 +73,7 @@ const RegistroProductos = () => {
 				</label>
 				<button
 					type='submit'
-					className='col-span-2 p-2 m-3 text-black bg-blue-500 rounded-full shadow-md hover:bg-blue-600'
+					className='col-span-2 p-2 m-3 text-white bg-purple-900 rounded-full shadow-md hover:bg-purple-600'
 				>
 					Guardar Producto
 				</button>

@@ -16,33 +16,85 @@
 }
 
 .tabla th {
-	--tw-bg-opacity: 1;
-	background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
+	--tw-bg-opacity: 0.8;
+	background-color: rgba(21, 0, 96, var(--tw-bg-opacity));
 	/*background-color: #0e62b1;*/
-	color: black;
+	color: #fff;
 	padding-top: 12px;
 	padding-bottom: 12px;
-	text-align: left;
+	text-align: center;
+	font-size: larger;
 }
 
 .tabla tr:nth-child(even) {
 	--tw-bg-opacity: 1;
 	background-color: rgba(239, 246, 255, var(--tw-bg-opacity));
-	/*background-color: #f2f2f2;*/
+}
+
+.tabla tr:nth-child(odd) {
+	--tw-bg-opacity: 0.5;
+	background-color: rgba(234, 220, 218, var(--tw-bg-opacity));
+	color:#000;
+	text-shadow: #000;
 }
 
 .tabla tr:hover {
-	background-color: rgb(96, 165, 250);
+	--tw-bg-opacity: 0.2;
+	background-color: rgba(21, 0, 96, var(--tw-bg-opacity));
+	/* background-color: rgb(96, 165, 250); */
 	cursor: pointer;
+	color: #fff;
 }
 
-.img {
-	margin: 10px auto;
-	border-radius: 5px;
-	border: 1px solid #999;
-	padding: 13px;
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
+.select {
+	color: #000;
+}
+
+
+
+.login {
 	background: url(../media/login.jpg);
-	background-size: cover;
+	background-size: 100% 100%;
+}
+
+.musuarios {
+	background: url(../media/musuarios.jpg);
+	background-size: 100% 100%;
+}
+
+.mventas {
+	background: url(../media/mventas.jpg);
+	background-size: 100% 100%;
+}
+
+.mproductos {
+	background: url(../media/mproductos.jpg);
+	background-size: 100% 100%;
+}
+
+.productos {
+	background: url(../media/productos.jpg);
+	background-size: 100% 100%;
+}
+
+.ventas {
+	background: url(../media/ventas.jpg);
+	background-size: 100% 100%;
+}
+
+.opaco{
+	--tw-bg-opacity: 0.5;
+	background-color: rgba(21, 0, 96, var(--tw-bg-opacity));
+	border-radius: 5px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.opaco1{
+	--tw-bg-opacity: 0.2;
+	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
+	border-radius: 5px;
+	padding: 20px;
+	margin: 20px;
+
 }

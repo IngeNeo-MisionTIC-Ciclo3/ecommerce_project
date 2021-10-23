@@ -86,21 +86,21 @@ const Ventas = () => {
 	};
 
 	return (
-		<div className="flex flex-col items-center min-h-screen px-4 py-2 bg-gray-50 sm:px-6 lg:px-8">
-			<form ref={form} onSubmit={submitForm} className='flex flex-col h-full'>
-				<h2 className='mt-6 text-3xl font-extrabold text-center text-blue-600'>Registro de Venta</h2>
+		<div className="flex flex-col items-center min-h-screen px-4 py-2 bg-gray-50 sm:px-6 lg:px-8 ventas">
+			<h2 className='my-10 mt-6 text-3xl font-extrabold text-center text-gray-50'>Registro de Venta</h2>
+			<form ref={form} onSubmit={submitForm} className='flex flex-col h-full px-10 mx-10 opaco1'>
 				<div className='grid grid-cols-4 gap-4 rounded-md shadow-sm'>
-					<label htmlFor='id_cliente'>Identificación Cliente
+					<label htmlFor='id_cliente' className='text-gray-50'>Identificación Cliente
 						<input name='id_cliente' type='number' required
 							className='relative block w-full px-1 py-2 text-gray-900 placeholder-gray-500 bg-blue-100 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
 							placeholder='Cedula cliente' />
 					</label>
-					<label htmlFor='nom_cliente'>Nombres Cliente
+					<label htmlFor='nom_cliente' className='text-gray-50'>Nombres Cliente
 						<input name='nom_cliente' type='text' required
 							className='relative block w-full px-1 py-2 text-gray-900 placeholder-gray-500 bg-blue-100 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
 							placeholder='Nombre Cliente' />
 					</label>
-					<label htmlFor='fecha'>Fecha
+					<label htmlFor='fecha' className='text-gray-50'>Fecha
 						<input name='fecha' type='date' required
 							className='relative block w-full px-1 py-2 text-gray-900 placeholder-gray-500 bg-blue-100 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm'
 							placeholder='2021-01-01' />
@@ -113,7 +113,7 @@ const Ventas = () => {
 				/>
 				<div className='px-2 py-2 mx-2 my-2'>
 					<div className='flex flex-row'>
-						<label htmlFor='vendedor'>Vendedor
+						<label htmlFor='vendedor' className='text-gray-50'>Vendedor
 							<select name='vendedor' className='relative block w-full px-1 py-2 text-gray-900 placeholder-gray-500 bg-blue-100 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm' defaultValue='' required>
 								<option disabled value=''>
 									Seleccione un Vendedor
@@ -127,7 +127,7 @@ const Ventas = () => {
 				</div>
 				<button
 					type='submit'
-					className='col-span-2 p-2 text-white bg-blue-400 rounded-full shadow-md hover:bg-blue-600'
+					className='col-span-2 p-2 text-white bg-purple-900 rounded-full shadow-md hover:bg-purple-600'
 				>
 					Crear Venta
 				</button>
@@ -181,9 +181,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 	return (
 		<div className='px-2 py-2 mx-2 my-2'>
 			<div className='flex flex-row'>
-				<label htmlFor='producto'>Producto
+				<label htmlFor='producto' className='px-10 text-gray-50'>Producto
 					<select
-						className='p-2 bg-blue-100'
+						className='p-2 mx-10 bg-blue-100 select'
 						value={productoAdicional._id ?? ''}
 						onChange={(e) =>
 							setProductoAdicional(productos.filter((v) => v._id === e.target.value)[0])
@@ -202,15 +202,17 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 						})}
 					</select>
 				</label>
-				<button
-					type='button'
-					onClick={() => agregarNuevoProducto()}
-					className='col-span-2 px-2 text-white bg-blue-400 rounded-full shadow-md hover:bg-blue-600'
-				>
-					Agregar Producto
-				</button>
+				<div className='px-5 mx-5'>
+					<button
+						type='button'
+						onClick={() => agregarNuevoProducto()}
+						className='col-span-2 px-2 py-2 text-white bg-purple-900 rounded-full shadow-md hover:bg-purple-600'
+					>
+						Agregar Producto
+					</button>
+				</div>
 			</div>
-			<table className='tabla'>
+			<table className='px-4 py-4 mx-4 my-4 tabla'>
 				<thead>
 					<tr>
 						<th>Id</th>
@@ -237,7 +239,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 					})}
 				</tbody>
 			</table>
-			<span className='text-2xl font-gray-900'> Valor Total Venta:  {totalVentas}</span>
+			<div className='px-2 py-2'>
+				<span className='px-2 text-3xl bg-purple-900 border-gray-50 text-gray-50'> Valor Total Venta:  {totalVentas}</span>
+			</div>
 		</div>
 	);
 };

@@ -43,11 +43,8 @@ const MProductos = () => {
 	}, [mostrarTabla]);
 
 	return (
-		<div className='flex flex-col items-center justify-center w-full h-full p-8'>
-			<div className='flex flex-col w-full'>
-				<h2 className='text-3xl font-extrabold text-gray-900'>Página de administración de Productos</h2>
-
-			</div>
+		<div className='flex flex-col items-center justify-center w-full h-full p-8 mproductos'>
+			<h2 className='text-3xl font-extrabold text-gray-50'>Página de administración de Productos</h2>
 			<TablaProductos cargando={cargando} listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
 			<ToastContainer position='bottom-center' autoClose={4000} />
 		</div>
@@ -67,14 +64,13 @@ const TablaProductos = ({ cargando, listaProductos, setEjecutarConsulta }) => {
 	}, [busqueda, listaProductos]);
 
 	return (
-		<div className='flex flex-col items-center justify-center w-full'>
+		<div className='flex flex-col items-center justify-center w-full mproductos'>
 			<input
 				value={busqueda}
 				onChange={(e) => setBusqueda(e.target.value)}
 				placeholder='Buscar'
 				className='self-start px-3 py-1 border-2 border-gray-700 rounded-md focus:outline-none focus:border-blue-500'
 			/>
-			<h2 className='text-2xl font-extrabold text-gray-800'>Todos los Productos</h2>
 			<div className='hidden w-full md:flex'>
 				{cargando ? (
 					<ReactLoading type="spinningBubbles" color="#0040FF" height={667} width={375} />
@@ -180,7 +176,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 				<>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='text'
 							value={infoNuevoProducto.nom_producto}
 							onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nom_producto: e.target.value })}
@@ -188,7 +184,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='text'
 							value={infoNuevoProducto.descripcion}
 							onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcion: e.target.value })}
@@ -196,7 +192,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='number'
 							value={infoNuevoProducto.valorU}
 							onChange={(e) =>
@@ -206,7 +202,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='number'
 							value={infoNuevoProducto.cantidad}
 							onChange={(e) =>
@@ -215,7 +211,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 						/>
 					</td>
 					<td>
-						<select name="estado" id="" defaultValue={infoNuevoProducto.estado} onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+						<select name="estado" id="" defaultValue={infoNuevoProducto.estado} onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg select" required>
 							<option disabled value={0}>seleccione una opcion</option>
 							<option>Disponible</option>
 							<option>No Disponible</option>
