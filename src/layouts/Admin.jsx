@@ -11,8 +11,8 @@ const AdminLayout = ({ children }) => {
 	const [cargandoInformacionUsuario, setCargandoInformacionUsuario] = useState(false);
 	const { setUserData } = useUser();
 
-	//const urllogout = "http://localhost:3000";
-	const urllogout = "https://mighty-escarpment-28176.herokuapp.com/"
+	const urllogout = "http://localhost:3000";
+	//const urllogout = "https://mighty-escarpment-28176.herokuapp.com/"
 
 	useEffect(() => {
 		//Creamos una función para obtener un token desde Auth0

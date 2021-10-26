@@ -29,8 +29,8 @@ function App() {
 		<Auth0Provider
 			domain='ingeneomisionticciclo3ecommerceproject.us.auth0.com'
 			clientId='1rCaefPr0j6RjQsGzrmJKPcGcunKCHiW'
-			redirectUri='https://mighty-escarpment-28176.herokuapp.com/admin/perfil/'
-			//redirectUri='http://localhost:3000/admin/perfil/'
+			//redirectUri='https://mighty-escarpment-28176.herokuapp.com/admin/perfil/'
+			redirectUri='http://localhost:3000/admin/perfil/'
 			audience='API-Ecommerce-Project'
 		>
 			<div className='App'>
@@ -41,7 +41,7 @@ function App() {
 								<AdminLayout>
 									<Switch>
 										<Route path='/admin/perfil'>
-											<RutaPrivada listaRoles={['Sin Rol', 'Administrador', 'Vendedor']}>
+											<RutaPrivada listaRoles={['Sin rol', 'Administrador', 'Vendedor']}>
 												<Perfil />
 											</RutaPrivada>
 										</Route>
