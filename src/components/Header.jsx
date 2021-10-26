@@ -7,7 +7,8 @@ import ComponentePrivado from '../components/ComponentePrivado';
 
 const Navbar = () => {
 	const { user, logout } = useAuth0();
-	const urllogout = "http://localhost:3000";
+	//const urllogout = "http://localhost:3000";
+	const urllogout = "https://mighty-escarpment-28176.herokuapp.com/"
 
 	//Creamos una funcion para el cierre de sesion y eliminamos el token del LocalStorage
 	const cerrarSesion = () => {
@@ -16,7 +17,7 @@ const Navbar = () => {
 	}
 	//Usamos el componente privado para proteger el menu y que solo permita la visualizacion de los mismos a los roles asignados para tal fin
 	return (
-		<nav className='flex justify-between w-full bg-gray-200 border border-gray-300 navbar'>
+		<nav className='flex justify-between w-full px-5 navbar menu'>
 
 			<div>
 				<Link to='/'>
@@ -42,7 +43,7 @@ const Navbar = () => {
 					<ComponentePrivado listaRoles={['Administrador', 'Vendedor']}>
 						<li><Ruta icono='fas fa-money-check-alt' ruta='/admin/mventas' nombre='Maestro Ventas' /></li >
 					</ComponentePrivado>
-					<li><button onClick={() => cerrarSesion()} className='flex w-full p-4 px-2 my-3 text-white bg-gray-700 rounded-md hover:bg-blue-900 justify-items-stretch fas fa-sign-out-alt '>  Cerrar Sesión  </button></li>
+					<li><button onClick={() => cerrarSesion()} className='flex w-full p-4 px-2 my-3 text-white bg-purple-900 rounded-md hover:bg-purple-600 justify-items-stretch fas fa-sign-out-alt '>  Cerrar Sesión  </button></li>
 				</ul>
 			</div >
 		</nav >
@@ -54,7 +55,8 @@ const Ruta = ({ icono, ruta, nombre, usuario }) => {
 	return (
 		<Link to={ruta}>
 			<button
-				className={`flex w-full p-4 my-2 bg-${isActive ? 'blue' : 'gray'}-700 hover:bg-blue-900 justify-items-stretch text-white rounded-md`}>
+				className={`flex w-full p-4 my-2 bg-${isActive ? 'purple' : 'gray'}-900 hover:bg-purple-600 justify-items-stretch text-white rounded-md border-red-900 solid`}>
+
 				{usuario ? (
 					<>
 						<img src={usuario.picture} className='w-5 h-5 mx-2 rounded-full' alt='perfil' />

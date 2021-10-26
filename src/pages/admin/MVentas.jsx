@@ -37,11 +37,9 @@ const Mventas = () => {
 	}, [mostrarTabla]);
 
 	return (
-		<div className='flex flex-col items-center justify-center w-full h-full p-8'>
-			<div className='flex flex-col w-full'>
-				<h2 className='text-3xl font-extrabold text-gray-900'>Página de administración de Ventas</h2>
+		<div className='flex flex-col items-center justify-center w-full h-full p-8 mventas'>
+			<h2 className='text-4xl font-extrabold text-gray-50'>Página de administración de Ventas</h2>
 
-			</div>
 			<TablaVentas listaVentas={ventas} setEjecutarConsulta={setEjecutarConsulta} />
 			<ToastContainer position='bottom-center' autoClose={4000} />
 		</div>
@@ -68,7 +66,6 @@ const TablaVentas = ({ listaVentas, setEjecutarConsulta }) => {
 				placeholder='Buscar'
 				className='self-start px-3 py-1 border-2 border-gray-700 rounded-md focus:outline-none focus:border-blue-500'
 			/>
-			<h2 className='text-2xl font-extrabold text-gray-800'>Todas las Ventas</h2>
 			<div className='hidden w-full md:flex'>
 				<table className='tabla'>
 					<thead>
@@ -125,6 +122,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 		nom_cliente: venta.nom_cliente,
 		nom_vendedor: venta.nom_vendedor,
 		nom_producto: venta.nom_producto,
+		fecha: venta.fecha,
 		v_total: venta.v_total,
 		estado: venta.estado,
 	});
@@ -138,6 +136,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 				nom_cliente: infoNuevaVenta.nom_cliente,
 				nom_vendedor: infoNuevaVenta.nom_vendedor,
 				nom_producto: infoNuevaVenta.nom_producto,
+				fecha: infoNuevaVenta.fecha,
 				v_total: infoNuevaVenta.v_total,
 				estado: infoNuevaVenta.estado,
 			},
@@ -176,7 +175,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 				<>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='text'
 							value={infoNuevaVenta.id_cliente}
 							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, id_cliente: e.target.value })}
@@ -184,7 +183,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='text'
 							value={infoNuevaVenta.nom_cliente}
 							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nom_cliente: e.target.value })}
@@ -192,7 +191,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='text'
 							value={infoNuevaVenta.nom_vendedor}
 							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nom_vendedor: e.target.value })
@@ -201,7 +200,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='text'
 							value={infoNuevaVenta.nom_producto}
 							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nom_producto: e.target.value })
@@ -210,7 +209,16 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 					</td>
 					<td>
 						<input
-							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50'
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
+							type='date'
+							value={infoNuevaVenta.fecha}
+							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, fecha: e.target.value })
+							}
+						/>
+					</td>
+					<td>
+						<input
+							className='p-2 m-2 border border-gray-600 rounded-lg bg-gray-50 select'
 							type='number'
 							value={infoNuevaVenta.v_total}
 							onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, v_total: e.target.value })
@@ -218,7 +226,7 @@ const FilaVenta = ({ venta, setEjecutarConsulta }) => {
 						/>
 					</td>
 					<td>
-						<select name="estado" id="" defaultValue={infoNuevaVenta.estado} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg" required>
+						<select name="estado" id="" defaultValue={infoNuevaVenta.estado} onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estado: e.target.value })} className="p-2 m-2 bg-blue-100 border-blue-500 rounded-lg select" required>
 							<option disabled value={0}>seleccione una opcion</option>
 							<option>En Proceso</option>
 							<option>Entregada</option>
