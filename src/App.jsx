@@ -41,7 +41,7 @@ function App() {
 								<AdminLayout>
 									<Switch>
 										<Route path='/admin/perfil'>
-											<RutaPrivada listaRoles={['Sin Rol', 'Administrador', 'Vendedor']}>
+											<RutaPrivada listaRoles={['Sin rol', 'Administrador', 'Vendedor']}>
 												<Perfil />
 											</RutaPrivada>
 										</Route>
