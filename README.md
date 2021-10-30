@@ -7,13 +7,13 @@ Desarrollado en React con  Create React App
 #### Colaboradores – Sprint 3
 
 
-|     | Colaboradores                        | Interfaz -                                 |
-| --- | ------------------------------------ | ------------------------------------------ |
-| `1` | Roger Alexis Valencia Garcia.        | Maestro de producto                        |
-| `2` | Diana Marcela Pinilla Ortegón        | Registro de producto                       |
-| `3` | Rafael Alejandro Lancheros Rodríguez | Maestro de venta                           |
-| `4` | Leidy Viviana Gallardo Rico          | Registro de venta                          |
-| `5` | Javier Esteban Romero Medina         | Maestro de usuario                         |
+|     | Colaboradores                        |
+| --- | ------------------------------------ |
+| `1` | Roger Alexis Valencia Garcia.        |
+| `2` | Diana Marcela Pinilla Ortegón        |
+| `3` | Rafael Alejandro Lancheros Rodríguez |
+| `4` | Leidy Viviana Gallardo Rico          |
+| `5` | Javier Esteban Romero Medina         |
 
 
 ### Link al tablero de Trello
